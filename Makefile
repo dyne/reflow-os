@@ -21,6 +21,9 @@ run:
 bg:
 	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.run.bg
 
+down:
+	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.down
+
 stop:
 	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.stop
 
@@ -28,6 +31,9 @@ reset: stop
 	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.down
 
 all: pull config run
+
+update:
+	cd bonfire && git checkout . && git pull --rebase
 
 build:
 	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.build
