@@ -8,4 +8,13 @@ This repository contains a set of scripts to run the entirety of the Reflow OS o
 - Zenroom
 - Apiroom
 
+## Quick start
+
+```
+make pull
+make config
+make run
+```
+
+
 
