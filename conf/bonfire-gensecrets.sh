@@ -11,6 +11,12 @@ POSTGRES_USER=postgres
 POSTGRES_DB=bonfire_db
 POSTGRES_PASSWORD=$( (echo "print(OCTET.random(64):base58())" | ./zenroom 2>/dev/null) | tr -d '\0' )
 
+# smtp auth configuration
+MAIL_FROM=no-reply@dyne.org
+MAIL_SERVER=smtp.sendgrid.net
+MAIL_USER=apikey
+MAIL_PASSWORD=FILL-BY-HAND
+
 # signup to mailgun.com and edit with your domain and API key
 MAIL_DOMAIN=mailg.mydomain.net
 MAIL_KEY=123
