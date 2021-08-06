@@ -28,7 +28,7 @@ cd reflow-os
 
 ```
 # start-up the docker instance (the docker daemon must be running)
-make pull || make config || make run
+make pull && make config && make run
 
 ```
 
