@@ -5,7 +5,7 @@ services:
     # You can build your own image from the source running:
     # $ make rel-build
     # $ make rel-tag-latest
-    image: "bonfirenetworks/reflow:latest"
+    image: "dyne/reflow:latest"
     container_name: "bonfire_web"
     restart: always
     ports:
