@@ -1,11 +1,11 @@
 pull:
-	if ! [ -r bonfire ]; then git clone https://github.com/bonfire-networks/bonfire-app.git bonfire; fi
+	if ! [ -r bonfire ]; then git clone https://github.com/dyne/bonfire-app.git bonfire; fi
 	if ! [ -r zenroom ]; then wget https://files.dyne.org/zenroom/nightly/zenroom-linux-amd64 -O zenroom && chmod +x zenroom; fi
 	docker pull bonfirenetworks/reflow:latest
 
 update:
 	cd bonfire && git pull
-	docker pull bonfirenetworks/reflow:latest
+	docker pull dyne/reflow:latest
 
 config:
 	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire pre-config
