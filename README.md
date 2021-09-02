@@ -20,7 +20,7 @@ Clone the ReflowOS builder git repository
 
 ```
 # clone the repo
-git clone https://gitub.com/dyne/reflow-os
+git clone https://github.com/dyne/reflow-os
 
 # enter local workspace
 cd reflow-os
