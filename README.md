@@ -28,19 +28,10 @@ cd reflow-os
 
 ```
 # start-up the docker instance (the docker daemon must be running)
-make pull && make config && make run
-
+make
 ```
 
 ## Configuration
-
-### Load initial ReflowOS database schema
-
-In the resulting elixir console terminal prompt from `make run`, to reset & initialise an empty database, execute
-
-```
-Bonfire.Repo.ReleaseTasks.migrate
-```
 
 ### Register a User through the UI 
 
@@ -53,7 +44,6 @@ Click the Signup button and enter a name and password for new user registration.
 Copy and Paste the confirmation URL from the elixir console to the browser URL bar to activate the new user.
 
 ### Create Initial Quantity Type
-
 
 #### Log in to the GraphQL UI
 
@@ -127,8 +117,7 @@ Freshly pull, config and run the ReflowOS docker instance
 
 ```
 # start-up the docker instance
-make pull && make config && make run
-
+make
 ```
 
 Then repeat the Configuration steps
