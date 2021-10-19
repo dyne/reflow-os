@@ -1,3 +1,5 @@
+all: pull config setup run
+
 pull:
 	if ! [ -r bonfire ]; then git clone https://github.com/dyne/bonfire-app.git bonfire; fi
 	if ! [ -r zenroom ]; then wget https://files.dyne.org/zenroom/nightly/zenroom-linux-amd64 -O zenroom && chmod +x zenroom; fi
@@ -13,9 +15,12 @@ config:
 	cat conf/bonfire-public.env > bonfire/config/dev/public.env
 	./conf/bonfire-gensecrets.sh > bonfire/config/prod/secrets.env
 	./conf/bonfire-gensecrets.sh > bonfire/config/dev/secrets.env
+	cp docker-compose.yml bonfire/docker-compose.release.yml
+
+setup:
+	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.setup
 
 run:
-	cp docker-compose.yml bonfire/docker-compose.release.yml
 	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.run
 
 bg:
@@ -30,11 +35,8 @@ stop:
 reset: stop
 	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.down
 
-all: pull config run
-
-update:
-	cd bonfire && git checkout . && git pull --rebase
-
 build:
 	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.build
 
+tasks.create_user:
+	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.tasks.create_user email=${email} pass=${pass} user=${user} name=${name}
