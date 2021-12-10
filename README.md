@@ -33,7 +33,7 @@ make
 
 ## Configuration
 
-### Register a User through the UI 
+### Register a User through the UI
 
 With a browser, open the URL for the UI (**default: http://localhost:4000**)
 
@@ -42,6 +42,26 @@ Click the Signup button and enter a name and password for new user registration.
 (The elixir console will log a registration confirmation link)
 
 Copy and Paste the confirmation URL from the elixir console to the browser URL bar to activate the new user.
+
+### Create users through the command-line
+
+While ReflowOS is not running, you can create users by running:
+
+```
+make tasks.create_user email="bob@example.test" pass="bobthehunter2" user="bob" name="Bob Smith"
+```
+
+Here, `email` is the email address, `pass` is the passphrase, `user`
+is the username, `name` is the full name of the user you want to create.
+`email` and `pass` fields are required, but `user` and `name` fields
+are optional and will be automatically generated for you if you don't
+provide.
+
+`email` must be a valid email address and `pass` must be longer than
+8 characters.
+
+This will create a verified user, meaning you don't have to verify your
+email address.
 
 ### Create Initial Quantity Type
 
