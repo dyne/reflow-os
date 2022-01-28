@@ -7,12 +7,14 @@ This repository contains a set of scripts to run the entirety of the ReflowOS on
 - Bonfire (ReflowOS UI at default: http://localhost:4000)
 - Zenroom
 - Apiroom
-
 - GraphiQL (UI at default: http://localhost:4000/api/explore)
+- Reflow Amsterdam (optional)
 
 ## Pre-installation checks
 
 Ensure that Docker is installed and the docker daemon is running on your host.
+
+Optionally, you'll need a ruby 3.0.1 stack for the Reflow Amsterdam scripts.
 
 ## Installation
 
@@ -141,3 +143,15 @@ make
 ```
 
 Then repeat the Configuration steps
+
+## Running Reflow Amsterdam scripts
+
+After setting up the ReflowOS (`config` and `setup` make targets)
+and while it is not running, run `make rfams_config` to set up Reflow
+Amsterdam and run one of the scenarios:
+
+- swapshop: `make rfams_swapshop`
+- zorgschorten: `make rfams_zorgschorten`
+- zorgschorten_simple: `make rfams_zorgschorten_simple`
+
+Don't forget to have a ruby 3.0.1 stack installed for the scripts to work.
