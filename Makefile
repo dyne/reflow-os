@@ -60,3 +60,30 @@ build: ## Build a new docker image locally
 
 latest: ## Build a new docker image locally and tag latest
 	FLAVOUR=reflow ORG_NAME=dyne APP_DOCKER_REPO="dyne/reflow" MIX_ENV=prod make -C bonfire rel.tag.latest
+
+
+##@ Reflow Amsterdam (ruby scripts to run various scenarios to fill the database)
+
+rfams_config: ## configure reflow amsterdam
+	@if ! test -d rfams ; then \
+		git clone https://gitlab.waag.org/code/reflow_amsterdam.git rfams; \
+		cd rfams/sim || exit 1 ; \
+		git checkout -q f4f892995a4777a72fceb31ac1f34a316e3cf180 ; \
+		bundle config set --local path vendor/bundle || exit 1 ; \
+		bundle install ; \
+	fi
+
+rfams_swapshop: bg ## run the swapshop scenario
+	@cd rfams/sim || exit 1 ; \
+	    REFLOW_OS_PATH=$$PWD/../.. bundle exec ruby swapshop/simulation.rb && \
+	    cd ../.. && make down
+
+rfams_zorgschorten: bg ## run the zorgschorten scenario
+	@cd rfams/sim || exit 1 ; \
+	    REFLOW_OS_PATH=$$PWD/../.. bundle exec ruby zorgschorten/zorgschorten.rb && \
+	    cd ../.. && make down
+
+rfams_zorgschorten_simple: bg ## run the zorgschorten_simple scenario
+	@cd rfams/sim || exit 1 ; \
+	    REFLOW_OS_PATH=$$PWD/../.. bundle exec ruby zorgschorten/zorgschorten_simple.rb && \
+	    cd ../.. && make down
