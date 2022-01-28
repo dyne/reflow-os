@@ -41,7 +41,7 @@ stop:
 reset: stop
 	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.down
 
-create_user: ## registers a new user with $name $email $pass $user
+tasks.create_user: ## registers a new user with $name $email $pass $user
 	$(if ${name},,$(error  "name undefined"))
 	$(if ${email},,$(error "email undefined"))
 	$(if ${pass},,$(error  "pass undefined"))
