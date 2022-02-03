@@ -10,6 +10,7 @@ ENCRYPTION_SALT=$( (echo "print(OCTET.random(64):base58())" | ./zenroom 2>/dev/n
 POSTGRES_USER=postgres
 POSTGRES_DB=bonfire_db
 POSTGRES_PASSWORD=$( (echo "print(OCTET.random(64):base58())" | ./zenroom 2>/dev/null) | tr -d '\0' )
+POSTGRES_TIMEOUT=10000 # in ms
 
 # smtp auth configuration
 MAIL_FROM=no-reply@dyne.org
