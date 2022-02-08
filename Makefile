@@ -10,7 +10,7 @@ help:
 secrets:
 	@if ! test -r zenroom ; then \
 		( \
-			if test "$(uname -s)" = Darwin ; then \
+			if test "$$(uname -s)" = Darwin ; then \
 				wget -O zenroom https://files.dyne.org/zenroom/nightly/zenroom-osx.command ; \
 			else \
 				wget -O zenroom https://files.dyne.org/zenroom/nightly/zenroom-linux-amd64 ; \
