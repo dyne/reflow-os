@@ -8,7 +8,15 @@ help:
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' Makefile
 
 secrets:
-	@if ! [ -r zenroom ]; then wget https://files.dyne.org/zenroom/nightly/zenroom-linux-amd64 -O zenroom && chmod +x zenroom; fi
+	@if ! test -r zenroom ; then \
+		( \
+			if test "$(uname -s)" = Darwin ; then \
+				wget -O zenroom https://files.dyne.org/zenroom/nightly/zenroom-osx.command ; \
+			else \
+				wget -O zenroom https://files.dyne.org/zenroom/nightly/zenroom-linux-amd64 ; \
+			fi \
+		) && chmod +x zenroom ; \
+	fi
 	@if ! [ -r conf/secrets.env ]; then \
 	 echo "Generating new conf/secrets.env"; \
 	 ./conf/bonfire-gensecrets.sh > conf/secrets.env; \
