@@ -8,6 +8,7 @@ help:
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' Makefile
 
 secrets:
+	@if ! [ -r zenroom ]; then wget https://files.dyne.org/zenroom/nightly/zenroom-linux-amd64 -O zenroom && chmod +x zenroom; fi
 	@if ! [ -r conf/secrets.env ]; then \
 	 echo "Generating new conf/secrets.env"; \
 	 ./conf/bonfire-gensecrets.sh > conf/secrets.env; \
@@ -15,7 +16,6 @@ secrets:
 
 config: secrets ## configure to run locally
 	@if ! [ -r bonfire ]; then git clone https://github.com/dyne/bonfire-app.git bonfire; fi
-	@if ! [ -r zenroom ]; then wget https://files.dyne.org/zenroom/nightly/zenroom-linux-amd64 -O zenroom && chmod +x zenroom; fi
 	@FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire pre-config
 	@cat conf/bonfire-public.env > bonfire/config/prod/public.env \
 	 && cat conf/bonfire-public.env > bonfire/config/dev/public.env
