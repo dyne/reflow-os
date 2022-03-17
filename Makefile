@@ -37,6 +37,9 @@ setup:  ## setup migrations before running
 run:    ## run in foreground (ctrl-c to quit)
 	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.run
 
+run.tmux:    ## run in tmux session
+	tmux new -dsiex_console "FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.run"
+
 bg:     ## run in background
 	FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire rel.run.bg
 
