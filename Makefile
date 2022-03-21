@@ -23,7 +23,7 @@ secrets:
 	fi
 
 config: secrets ## configure to run locally
-	@if ! [ -r bonfire ]; then git clone https://github.com/dyne/bonfire-app.git bonfire; fi
+	@if ! [ -r bonfire ]; then git clone -b fedtest https://github.com/dyne/bonfire-app.git bonfire; fi
 	@FLAVOUR=reflow ORG_NAME=dyne MIX_ENV=prod make -C bonfire pre-config
 	@cat conf/bonfire-public.env > bonfire/config/prod/public.env \
 	 && cat conf/bonfire-public.env > bonfire/config/dev/public.env
