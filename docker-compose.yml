@@ -18,6 +18,7 @@ services:
       - SEARCH_MEILI_INSTANCE=http://search:7700
     depends_on:
       - db
+      - proxy
     volumes:
       - type: bind
         source: ./data/uploads
